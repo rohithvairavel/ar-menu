@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classic Burger — View in AR</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 20px 24px 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .back-btn {
+      text-decoration: none;
+      color: #f97316;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .header-text h1 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .header-text p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    .dish-info {
+      width: 100%;
+      max-width: 480px;
+      padding: 20px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .dish-info h2 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .dish-info .price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f97316;
+    }
+
+    .dish-desc {
+      width: 100%;
+      max-width: 480px;
+      padding: 8px 24px 16px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    model-viewer {
+      width: 100%;
+      max-width: 480px;
+      height: 380px;
+      background: radial-gradient(circle at 50% 60%, #2a1a0a 0%, #0f0f0f 70%);
+      --poster-color: transparent;
+    }
+
+    .ar-button-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 16px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ar-main-btn {
+      width: 100%;
+      padding: 16px;
+      background: #f97316;
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .ar-main-btn:active {
+      transform: scale(0.98);
+    }
+
+    .ar-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    .hint {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.5;
+    }
+
+    .tags {
+      width: 100%;
+      max-width: 480px;
+      padding: 0 24px 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 5px 12px;
+      background: rgba(249,115,22,0.12);
+      color: #f97316;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="back-btn" href="#">&#8592;</a>
+    <div class="header-text">
+      <h1>AR Menu</h1>
+      <p>Tap "View in AR" to see it on your table</p>
+    </div>
+  </header>
+
+  <div class="dish-info">
+    <h2>Classic Burger</h2>
+    <span class="price">₹299</span>
+  </div>
+
+  <div class="dish-desc">
+    Juicy beef patty with fresh lettuce, tomato, cheddar cheese, and pickles in a toasted sesame bun.
+  </div>
+
+  <div class="tags">
+    <span class="tag">Bestseller</span>
+    <span class="tag">Non-Veg</span>
+    <span class="tag">500 kcal</span>
+  </div>
+
+  <model-viewer
+    id="burger-viewer"
+    src="https://raw.githubusercontent.com/rohithvairavel/ar-menu/main/burger_realistic_free.glb"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    camera-controls
+    auto-rotate
+    shadow-intensity="1"
+    scale="0.3 0.3 0.3"
+    ar-scale="fixed"
+    alt="3D model of a classic burger">
+  </model-viewer>
+
+  <div class="ar-button-container">
+    <button class="ar-main-btn" onclick="document.getElementById('burger-viewer').activateAR()">
+      <svg class="ar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2"/>
+        <rect x="7" y="7" width="10" height="10" rx="1"/>
+      </svg>
+      View on Your Table (AR)
+    </button>
+    <p class="hint">Point your camera at a flat surface like your table or floor.<br>Works on most modern Android & iPhone devices.</p>
+  </div>
+
+</body>
+</html>
